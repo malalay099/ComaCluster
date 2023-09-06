@@ -76,7 +76,7 @@ plt.ylabel('Count')
 fig, ax = plt.subplots()
 ax = velocity.hist(bins=100,density=True, color='b')
 ax.set_xlim([2500,11000])
-#plt.title('نمودار سرعت_قدر ظاهری')
+#plt.title(' apparent Magnitude with Velocity')
 plt.xlabel('velocity (kms$^{-1}$)')
 plt.ylabel(' Magnitude ')
 plt.show()
@@ -85,8 +85,7 @@ plt.show()
 # In[7]:
 
 
-# محور افقی فراوانی(قدر ظاهری) و محور قایم سرعت کهکشان هاست.
-magnitude
+
 fig2, ax2 = plt.subplots()
 ax2 = plt.scatter(magnitude,velocity, marker="*", color='b', label = 'Data1+Data2')
 plt.xlim([10,25])
@@ -103,14 +102,13 @@ plt.show()
 
 
 # Loc
-# از لیبل یا برچسب سطر و ستون برای دسترسی به آن استفاده میکند.
 coma = df_coma.loc[(df_coma['Velocity  '] >=2000) & (df_coma['Velocity  '] <=12000)]
 
 
 # In[9]:
 
 
-# هسیتوگرام رسم میکنیم
+## plot of Histogram 
 
 hist, bin_edge = np.histogram(coma['Velocity  '], 20, density=True)
 
@@ -118,9 +116,6 @@ hist, bin_edge = np.histogram(coma['Velocity  '], 20, density=True)
 # In[10]:
 
 
-# تایع گاووسی 
-# تابع اولی تایع گاوسی است 
-# تابع دومی لگاریتم تابع گاوسی است.
 def gauss(x,a,mu,sigma):
     y = a - mu*(x-sigma)**2
     return y
@@ -132,7 +127,7 @@ def gauss2(x,a,mu,sigma):
 # In[11]:
 
 
-# Len:  برای محاسبه طول لیست
+# Len
 n = len(bin_edge)
 hist_x = np.zeros(n-1)
 for i in range(n-1):
@@ -169,7 +164,6 @@ plt.show()
 # In[14]:
 
 
-#‌محاسبه و رسم مو و زیگما با توجه به نمودار
 velocity = velocity[(velocity >= 4000) & (velocity <= 10000)]
 app_mag = coma['Magnitude   ']
 mu, sigma = norm.fit(velocity)
@@ -202,21 +196,18 @@ plt.show()
 
 
 sigma = 0.5/np.sqrt(coef[1])
-# سرعت متوسط
+## mean velocity 
 v_mean = coef[2]
-# سرعت مینیمم
+## minimum Velocity 
 v_min = v_mean - 2*sigma
-# سرعت ماکزیمم
+## maximum velocity 
 v_max = v_mean + 2*sigma
 print('Mean Velocity = {0:4.2f},   Minimum Velocity = {1:4.2f},   Maximum Velocity = {2:4.2f}'.format(v_mean, v_min, v_max))
 
 
 # In[17]:
 
-
-# تعداد کهکشان ها ما که در زیر نمودار تابع توزیع گاووسی است مجموع اش 545 کهکشان است.
-# و اینجا میانگین، ماکزیمم، مینیمم و استندرد دیویشن سرعت 545 کهکشان، قدر ظاهری 545 کهکشان و محورات اینها آن 545 کهکشان است.
-
+## for 545 galaxies
 coma.describe()
 #coma.head()
 #coma
@@ -261,7 +252,7 @@ plt.show()
 
 
 # Hubble Law (H_law = 67.4+/-0.5)
-# توسط قانون هابل فاصله تک تک کهکشان زیر نمودار را بدست اوردیم
+## Hubble's Law
 
 H_law = 67.4*(u.km/(u.s*u.Mpc))
 
@@ -286,7 +277,6 @@ print(d_gxy*unt)
 # In[21]:
 
 
-# از قانون هابل اول فاصله ها را بدست اوردم بعد ضرب ضریب ثابت هابل کردم که اینجا ماکزیمم و مینیمم فاصله هاست.
 
 vmax_gxy = 9889.00    # km/s
 vmin_gxy = 4732.00      # km/s
@@ -310,8 +300,6 @@ print('minimum distance:', d_min*(u.Mpc))
 # In[22]:
 
 
-# فاصله میانگین و فاصله استندرد دیویشن را از طریق قانون هابل بدست اوردم
-# اینجا فاصله میانگین یعنی فاصله هابلی کل کهکشان ها 99 میگا پارسک شد
 
 v_mean = 6980.00
 v_sigma = 1085.25
@@ -331,8 +319,7 @@ print('mean distnace: ', d*(u.Mpc))
 
 # In[23]:
 
-
-# سرعت شعاعی یا قطر ظاهری
+## apparent diameter
 # alpa 0.7 degree (0.012 radian)
 
 α = 0.012       # unit: (u.r)
@@ -346,7 +333,6 @@ print('apparent diameter:', D*u.Mpc)
 
 
 # Absolute Magnitude
-# در اینجا از رابطه زیر قدر مطلق تک تک کهکشان ها بدست امد 
 
 # am (apparent magnitudes of the galaxy )
 am = app_mag.to_numpy()
@@ -365,8 +351,6 @@ print(abs_m)
 
 # In[25]:
 
-
-# از رابطه بالا میانگین قدر مطلق، ماکزیمم و مینیمم قدر مطلق را بدست اوردم
 
 appM_max = 22.61
 appM_min = 2.20
@@ -391,7 +375,6 @@ print('Absolute Magnitude mean : ', absM_mean)
 # In[26]:
 
 
-# در اینجا درخشندگی تک تک کهکشان ها بدست میاریم
 #Luminosity of the galaxy
 Lum_sun = 3.85e+26    #*(u.watt)
 
@@ -426,8 +409,6 @@ print('Luminosity galaxy of mean:', Lumgxy_mean*(u.watt))
 # In[28]:
 
 
-#  ..در اینجا از رابطه ذیل جرم تک تک کهکشان های زیر نمودار تابع گاووسی را بدست اورده و در سلول بعدی میانگین، مینیممم و ماکزیمم را بدست اوردم
-
 # Galaxy Mass
 
 def Mass_gxy(absMag_gxy):
@@ -446,7 +427,7 @@ print(Mg*u.kg)
 # In[29]:
 
 
-# جدول زیر مقادیر 191 کهکشان(جرم، درخشندگی، قدر مطلق، قدر ظاهری و مدل فاصله) آنهاست
+## this table for 545 galaxies 
 
 my_dict = {
     'Lum_gxy ' : lum_gxy,
@@ -463,8 +444,6 @@ clusters
 # In[30]:
 
 
-# جدول زیر مقادیر 191 کهکشان(جرم، درخشندگی، قدر مطلق، قدر ظاهری و مدل فاصله) آنهاست
-
 my_dict = {
     'Distance ': d_gxy
     
@@ -479,11 +458,11 @@ clusters.sum()
 # In[31]:
 
 
-# مقدار سیگما را از روی نمودار بالا داریم
-# MN_gxy (Mass.N of galaxy): جرم کل را هم از جدول بالا داریم
+
+# MN_gxy (Mass.N of galaxy): total Mass of galaxies 
 
 σ = 1e+6              # m/s
-MN_gxy = 2.14e+45           # kg         #جرم کل 191 کهکشان 
+MN_gxy = 2.14e+45           # kg         total mass of for 545 galaxies 
 K_egy = 3/2*MN_gxy*σ**2
 
 print('Kinetic_energy of galaxy:', K_egy*u.Joule)
@@ -492,7 +471,7 @@ print('Kinetic_energy of galaxy:', K_egy*u.Joule)
 # In[32]:
 
 
-# :میانگین انرژی جنبشی 191 کهکشان خوشه ی گیسو عبارت از
+## mean energy kinetic 
 
 N = 545
 K_mean = K_egy/N
@@ -503,7 +482,7 @@ print('The Kinetic Energy mean of galaxy:', K_mean*u.J)
 # In[33]:
 
 
-# انرژی پتانسیل را بدست میاریم
+## Potential energy 
 
 G = 6.6e-11              # m^3/kg*s^2
 MN_gxy = 2.1e+45      # kg
@@ -516,6 +495,7 @@ print('Potential energy:', P_e*(u.J))
 # In[34]:
 
 
+## mean of potential energy
 N = 545
 P_mean = P_e/N
 
@@ -524,9 +504,7 @@ print(P_mean)
 
 # In[35]:
 
-
-# زمان خوشه گیسو
-# اگر زمانی ازین مرتبه صبر کنیم شعاع این خوشه تقربیآ دو برابر میشود
+# Time of coma cluster
 
 δv = 1085.25           # km/s
 R_gxy = 3.08e+19        # km
@@ -537,7 +515,7 @@ print('Times of coma cluster:', T*(u.second))
 # In[36]:
 
 
-# جرم ویریال
+## Virial theorem 
 
 σ = 1e+7          # unit: m/s
 R_vir = 3.08e+22          # unit: m
@@ -550,7 +528,7 @@ print('Mass Virial of galaxy:', M_vir*u.kg)
 # In[37]:
 
 
-# چگالی خوشه گیسو
+## Density of dark matter
 
 #R = 1Mpc
 #v = 2.92e+67              # m^3
