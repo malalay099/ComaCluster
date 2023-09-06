@@ -1,7 +1,7 @@
 # ComaCluster
 We have the data of about 1000 galaxies of the Coma cluster.
 This data consists of three data catalogs of the Coma cluster, which we created by combining these three catalogs, which are about 1000 galaxies.
-In this Python file, in the first step, we drew the histogram of this data
+In this Python file, in the first step, we drew the histogram of this data.
 In the second step, using velocities and apparent magnitude, we estimated the absolute magnitude of each galaxy.
 In the third step, we obtained the luminosity of the galaxies using the absolute value and the apparent value.
 In the fourth step, as a result, we estimated the total mass luminosity and the average mass of the galaxies.
